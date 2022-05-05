@@ -1,10 +1,17 @@
 package com.example.model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -42,15 +49,31 @@ public class Course {
 	@Column(name = "CP")
 	private int CP;
 	
-	@Column(name = "IdP")
-	private int idP;
+	/*
+	//viens-pret-viens
+	//join column uz otras klases no mainiga
+	@OneToOne
+	@JoinColumn(name="IdPr")
+	private Professor professor;
 	
+	//vienam kursam-pret-viens professors
+	//daudzi-pret-vienu
+	@ManyToOne
+	@JoinColumn(name="IdPr")
+	private Professor professor2;
+	
+	
+	//vienam kursam vairāki pasniedzeji
+	//daudzi-pret-dauziem
+	@ManyToMany
+	@JoinTable(name="prof_course", joinColumns = @JoinColumn(name="IdPr"), inverseJoinColumns = @JoinColumn(name="IdC"))
+	private Collection<Professor> professors;
+	*/
 	
 	public Course(int idC, String title, int cP, int idP) {
 		this.idC = idC;
 		this.title = title;
 		this.CP = cP;
-		this.idP = idP;
 	}
 	
 	
