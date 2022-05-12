@@ -50,13 +50,15 @@ public class Professor {
 	@Column(name = "Degree")
 	private ProfDegree degree;
 	
-	/*
+	
 	//viens-pret-viens
 	//mapped by uz mainigo no otras klases
 	@OneToOne(mappedBy = "professor")
 	@ToString.Exclude
 	private Course course;
-	
+
+
+	/*
 	//viens professors-pret-vairaki kursi
 	//viens-pret-daudziem
 	@OneToMany(mappedBy = "professor2")
@@ -73,11 +75,18 @@ public class Professor {
 	//3.konstrutors no lombok
 	
 	//3.2. konstruktors
-	public Professor(int idPr, String name, String surname, ProfDegree degree) {
+
+	public Professor(
+			@Size(min = 3, max = 20) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Doesn't corespond to the prefix") String name,
+			@Size(min = 3, max = 20) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Doesn't corespond to the prefix") String surname,
+			ProfDegree degree) {
+		super();
 		this.name = name;
 		this.surname = surname;
 		this.degree = degree;
 	}
+	
+	
 	//4.toString()
 	
 	

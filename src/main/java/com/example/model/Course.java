@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -23,6 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.PackagePrivate;
 
 @Getter
 @Setter
@@ -49,13 +51,13 @@ public class Course {
 	@Column(name = "CP")
 	private int CP;
 	
-	/*
+	
 	//viens-pret-viens
 	//join column uz otras klases no mainiga
 	@OneToOne
 	@JoinColumn(name="IdPr")
 	private Professor professor;
-	
+	/*
 	//vienam kursam-pret-viens professors
 	//daudzi-pret-vienu
 	@ManyToOne
@@ -69,12 +71,21 @@ public class Course {
 	@JoinTable(name="prof_course", joinColumns = @JoinColumn(name="IdPr"), inverseJoinColumns = @JoinColumn(name="IdC"))
 	private Collection<Professor> professors;
 	*/
-	
-	public Course(int idC, String title, int cP, int idP) {
-		this.idC = idC;
+
+	@OneToMany(mappedBy = "Course")
+	@ToString.Exclude
+	private Collection<Grade> grades;
+
+	public Course(
+			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\s]+", message = "Doesn't corespond to the prefix") String title,
+			@Min(0) @Max(20) int cP, Professor professor) {
+		super();
 		this.title = title;
-		this.CP = cP;
+		CP = cP;
+		this.professor = professor;
 	}
+	
+
 	
 	
 }

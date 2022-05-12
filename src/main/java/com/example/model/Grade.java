@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,15 +26,26 @@ import lombok.ToString;
 @Entity
 
 public class Grade {
-	
-	@Column(name = "IdG")
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Setter(value=AccessLevel.NONE)
-	private int idG;
-	
-	private int idC;
-	private int idSt;
-	private int grade;
 
+    @Column(name = "IdGr")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Setter(value=AccessLevel.NONE)
+    private int idGr;
+    
+    @Min(0)
+    @Max(10)
+    @Column(name = "Value")
+    private int value;
+    
+    @ManyToOne
+    @JoinColumn(name = "IdSt")
+    private Student student;
+    
+    @ManyToOne
+    @JoinColumn(name = "IdC")
+    private Course course;
+    
+   
 }
+
