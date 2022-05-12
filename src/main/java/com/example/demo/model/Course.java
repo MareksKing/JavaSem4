@@ -51,13 +51,13 @@ public class Course {
 	@Column(name = "CP")
 	private int CP;
 	
-	
+	/*
 	//viens-pret-viens
 	//join column uz otras klases no mainiga
 	@OneToOne
 	@JoinColumn(name="IdPr")
 	private Professor professor;
-	/*
+	
 	//vienam kursam-pret-viens professors
 	//daudzi-pret-vienu
 	@ManyToOne
@@ -72,17 +72,18 @@ public class Course {
 	private Collection<Professor> professors;
 	*/
 
-	@OneToMany(mappedBy = "course")
-	@ToString.Exclude
-	private Collection<Grade> grades;
+
+	@ManyToMany(mappedBy = "courses")
+	private Collection<Professor> professors;
+	
 
 	public Course(
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\s]+", message = "Doesn't corespond to the prefix") String title,
-			@Min(0) @Max(20) int cP, Professor professor) {
+			@Min(0) @Max(20) int cP, Collection<Professor> professors) {
 		super();
 		this.title = title;
 		CP = cP;
-		this.professor = professor;
+		this.professors = professors;
 	}
 	
 

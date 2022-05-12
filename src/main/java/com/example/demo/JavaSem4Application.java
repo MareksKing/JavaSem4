@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Arrays;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,10 +40,16 @@ public class JavaSem4Application {
 				studRepo.save(std1);
 				studRepo.save(std2);
 				
-				Course c1 = new Course("Java programmesana", 2, pr1);
-				Course c2 = new Course("Vacu valoda", 2, pr2);
+				Course c1 = new Course("Java programmesana", 2, Arrays.asList(pr1, pr2));
+				Course c2 = new Course("Vacu valoda", 2, Arrays.asList(pr2));
 				courRepo.save(c1);
 				courRepo.save(c2);
+				pr1.addNewCourse(c1);
+				pr1.addNewCourse(c2);
+				profRepo.save(pr1);
+				
+				pr2.addNewCourse(c2);
+				profRepo.save(pr2);
 				
 				Grade g1 = new Grade(4, std2, c2);
 				Grade g2 = new Grade(6, std1, c1);
