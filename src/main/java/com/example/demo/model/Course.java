@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.demo.model;
 
 import java.util.Collection;
 
@@ -72,7 +72,7 @@ public class Course {
 	private Collection<Professor> professors;
 	*/
 
-	@OneToMany(mappedBy = "Course")
+	@OneToMany(mappedBy = "course")
 	@ToString.Exclude
 	private Collection<Grade> grades;
 

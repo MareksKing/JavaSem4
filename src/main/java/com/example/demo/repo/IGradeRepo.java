@@ -1,8 +1,8 @@
-package com.example.repo;
+package com.example.demo.repo;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.model.Grade;
+import com.example.demo.model.Grade;
 
 public interface IGradeRepo extends CrudRepository<Grade, Integer>{
 

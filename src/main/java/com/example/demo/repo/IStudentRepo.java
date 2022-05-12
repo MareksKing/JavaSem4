@@ -1,8 +1,8 @@
-package com.example.repo;
+package com.example.demo.repo;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.model.Student;
+import com.example.demo.model.Student;
 
 public interface IStudentRepo extends CrudRepository<Student, Integer>{
 

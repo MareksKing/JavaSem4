@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +45,15 @@ public class Grade {
     @ManyToOne
     @JoinColumn(name = "IdC")
     private Course course;
+
+	public Grade(@Min(0) @Max(10) int value, Student student, Course course) {
+		super();
+		this.value = value;
+		this.student = student;
+		this.course = course;
+	}
+    
+    
     
    
 }
