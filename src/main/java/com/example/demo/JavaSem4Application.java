@@ -37,8 +37,12 @@ public class JavaSem4Application {
 				
 				Student std1 = new Student("Emils", "Seflers");
 				Student std2 = new Student("Daniels", "Fisers");
+				Student std3 = new Student("Mareks", "Robalds");
+				Student std4 = new Student("Ess", "Tujauzini");
 				studRepo.save(std1);
 				studRepo.save(std2);
+				studRepo.save(std3);
+				studRepo.save(std4);
 				
 				Course c1 = new Course("Java programmesana", 2, Arrays.asList(pr1, pr2));
 				Course c2 = new Course("Vacu valoda", 2, Arrays.asList(pr2));
@@ -53,8 +57,12 @@ public class JavaSem4Application {
 				
 				Grade g1 = new Grade(4, std2, c2);
 				Grade g2 = new Grade(6, std1, c1);
+				Grade g3 = new Grade(4, std3, c2);
+				Grade g4 = new Grade(6, std4, c1);
 				gradRepo.save(g1);
 				gradRepo.save(g2);
+				gradRepo.save(g3);
+				gradRepo.save(g4);
 				
 			}
 		};

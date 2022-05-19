@@ -2,8 +2,6 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 
-import org.springframework.data.jpa.repository.Query;
-
 import com.example.demo.model.Grade;
 
 
