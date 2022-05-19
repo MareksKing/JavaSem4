@@ -32,62 +32,40 @@ public class GradeFilterImplementation implements IGradeFilter {
 
 	@Override
 	public ArrayList<Grade> filterGradesByCourse(int id) throws Exception {
-		if(!courseRepo.existsById(id)) {throw new Exception("Tads kurs nepastāv");}
+		if(!courseRepo.existsById(id)) {throw new Exception("Tads kurss nepastāv");}
 		ArrayList<Grade> courseGrades = gradeRepo.findByCourseIdC(id);
 		return courseGrades;
 	}
 
 	@Override
-	public ArrayList<Grade> filterGradesByStudentName(String name) {
+	public ArrayList<Grade> filterGradesByStudentName(String name) throws Exception {
+		if(!studentRepo.existsByName(name)) {throw new Exception("Students ar tādu vārdu nepastāv");}
 		ArrayList<Grade> studentGrades = gradeRepo.findByStudentName(name);
 		return studentGrades;
 	}
 
 	@Override
 	public ArrayList<Grade> filterNonPassingGradesAndStudents() {
-		ArrayList<Grade> visiGrades = (ArrayList<Grade>) gradeRepo.findAll();
-		ArrayList<Grade> nonPassingGrades = new ArrayList<>();
-		for (Grade grade : visiGrades) {
-			if(grade.getValue() < 4) {
-				nonPassingGrades.add(grade);
-			}
-		}
-		return nonPassingGrades;
+		return gradeRepo.findByValueLessThan(4);
 	}
 
 	@Override
-	public float calcAverageOfCourse(int id) {
-		float average = 0f;
-		ArrayList<Grade> visiGrades = gradeRepo.findByCourseIdC(id);
-		for (Grade grade : visiGrades) {
-			average += grade.getValue();
-		}
-		average = average/visiGrades.size();
-		return average;
+	public float calcAverageOfCourse(int id) throws Exception {
+		if(!courseRepo.existsById(id)) {throw new Exception("Nav tads id");}
+		return gradeRepo.calculateAVGByCourseID(id);
 	}
 
 	@Override
-	public float calcAverageOfStudent(int id) {
-		float average = 0f;
-		ArrayList<Grade> studentGrades = gradeRepo.findByStudentIdSt(id);
-		for (Grade grade : studentGrades) {
-			average += grade.getValue();
-		}
+	public float calcAverageOfStudent(int id) throws Exception{
+		if(!studentRepo.existsById(id)) {throw new Exception("Students ar tādu ID nepastāv");}
+		return gradeRepo.calculateAVGByStudentIdSt(id);
 		
-		average = average/studentGrades.size();
-		return average;
 	}
 
 	@Override
-	public ArrayList<Grade> filterNonPassingGradesByCourseID(int id) {
-		ArrayList<Grade> visiCourseGrades = gradeRepo.findByCourseIdC(id);
-		ArrayList<Grade> nonPassingGrades = new ArrayList<Grade>();
-		for (Grade grade : visiCourseGrades) {
-			if(grade.getValue() < 4) {
-				nonPassingGrades.add(grade);
-			}
-		}
-		return nonPassingGrades;
+	public ArrayList<Grade> filterNonPassingGradesByCourseID(int id) throws Exception {
+		if(!courseRepo.existsById(id)) {throw new Exception("Tads kurss ar ID neeksistē");}
+		return gradeRepo.findByCourseIdCAndValueLessThan(id, 4);
 	}
 
 }

@@ -6,4 +6,6 @@ import com.example.demo.model.Student;
 
 public interface IStudentRepo extends CrudRepository<Student, Integer>{
 
+	boolean existsByName(String name);
+
 }
