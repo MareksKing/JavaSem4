@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Grade;
+import com.example.demo.repo.ICourseRepo;
 import com.example.demo.repo.IGradeRepo;
+import com.example.demo.repo.IStudentRepo;
 import com.example.demo.services.IGradeFilter;
 
 @Service
@@ -14,14 +16,23 @@ public class GradeFilterImplementation implements IGradeFilter {
 
 	@Autowired
 	private IGradeRepo gradeRepo;
+	
+	@Autowired
+	private IStudentRepo studentRepo;
+	
+	@Autowired
+	private ICourseRepo courseRepo;
+	
 	@Override
-	public ArrayList<Grade> filterStudentGrades(int id) {
+	public ArrayList<Grade> filterStudentGrades(int id) throws Exception {
+		if(!studentRepo.existsById(id)) {throw new Exception("Studenta ID nepastāv");}
 		ArrayList<Grade> studGrades = gradeRepo.findByStudentIdSt(id);
 		return studGrades;
 	}
 
 	@Override
-	public ArrayList<Grade> filterGradesByCourse(int id) {
+	public ArrayList<Grade> filterGradesByCourse(int id) throws Exception {
+		if(!courseRepo.existsById(id)) {throw new Exception("Tads kurs nepastāv");}
 		ArrayList<Grade> courseGrades = gradeRepo.findByCourseIdC(id);
 		return courseGrades;
 	}
