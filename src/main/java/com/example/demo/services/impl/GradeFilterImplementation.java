@@ -28,26 +28,55 @@ public class GradeFilterImplementation implements IGradeFilter {
 
 	@Override
 	public ArrayList<Grade> filterGradesByStudentName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Grade> studentGrades = gradeRepo.findByStudentName(name);
+		return studentGrades;
 	}
 
 	@Override
 	public ArrayList<Grade> filterNonPassingGradesAndStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Grade> visiGrades = (ArrayList<Grade>) gradeRepo.findAll();
+		ArrayList<Grade> nonPassingGrades = new ArrayList<>();
+		for (Grade grade : visiGrades) {
+			if(grade.getValue() < 4) {
+				nonPassingGrades.add(grade);
+			}
+		}
+		return nonPassingGrades;
 	}
 
 	@Override
 	public float calcAverageOfCourse(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		float average = 0f;
+		ArrayList<Grade> visiGrades = gradeRepo.findByCourseIdC(id);
+		for (Grade grade : visiGrades) {
+			average += grade.getValue();
+		}
+		average = average/visiGrades.size();
+		return average;
 	}
 
 	@Override
 	public float calcAverageOfStudent(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		float average = 0f;
+		ArrayList<Grade> studentGrades = gradeRepo.findByStudentIdSt(id);
+		for (Grade grade : studentGrades) {
+			average += grade.getValue();
+		}
+		
+		average = average/studentGrades.size();
+		return average;
+	}
+
+	@Override
+	public ArrayList<Grade> filterNonPassingGradesByCourseID(int id) {
+		ArrayList<Grade> visiCourseGrades = gradeRepo.findByCourseIdC(id);
+		ArrayList<Grade> nonPassingGrades = new ArrayList<Grade>();
+		for (Grade grade : visiCourseGrades) {
+			if(grade.getValue() < 4) {
+				nonPassingGrades.add(grade);
+			}
+		}
+		return nonPassingGrades;
 	}
 
 }

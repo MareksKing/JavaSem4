@@ -13,5 +13,6 @@ public interface IGradeFilter {
 	public abstract ArrayList<Grade> filterNonPassingGradesAndStudents();
 	public abstract float calcAverageOfCourse(int id);
 	public abstract float calcAverageOfStudent(int id);
+	public abstract ArrayList<Grade> filterNonPassingGradesByCourseID(int id);
 	
 }

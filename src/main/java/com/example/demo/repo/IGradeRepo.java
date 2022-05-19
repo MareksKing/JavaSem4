@@ -12,4 +12,7 @@ public interface IGradeRepo extends CrudRepository<Grade, Integer>{
 
 	public abstract ArrayList<Grade> findByCourseIdC(int id);
 
+	public abstract ArrayList<Grade> findByStudentName(String name);
+
+
 }
